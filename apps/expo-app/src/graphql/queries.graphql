@@ -1,0 +1,17 @@
+query GetAllCategories {
+ allCategory {
+  _id
+  title
+  description
+  courses{
+    _id
+    title
+		description
+    thumbnail{
+      asset {
+        url
+      }
+    }
+  }
+ }
+}
