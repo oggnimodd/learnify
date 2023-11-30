@@ -15,3 +15,20 @@ query GetAllCategories {
   }
  }
 }
+
+query GetCourseChapterIds($courseId: ID!) {
+ Course(id: $courseId) {
+   chapters {
+     _id
+   }
+ }
+}
+
+query GetChapterDetails($chapterId: ID!) {
+ Chapter(id: $chapterId) {
+  _id
+  title
+  contentRaw
+  videoUrl
+ }
+}

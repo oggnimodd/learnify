@@ -28,18 +28,6 @@
     },
     "experiments": {
       "tsconfigPaths": true
-    },
-    "extra": {
-      "eas": {
-        "projectId": "6b52f941-2b07-4411-944d-80724c7a5a38"
-      }
-    },
-    "owner": "randomname20",
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/6b52f941-2b07-4411-944d-80724c7a5a38"
     }
   }
 }

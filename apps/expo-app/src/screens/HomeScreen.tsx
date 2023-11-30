@@ -7,10 +7,14 @@ import {
   View,
 } from "react-native";
 import tw from "twrnc";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import {
+  NativeStackScreenProps,
+  NativeStackNavigationProp,
+} from "@react-navigation/native-stack";
 import { RootStackParamList } from ".";
 import { FC } from "react";
 import { Course, useGetAllCategoriesQuery } from "@/graphql";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = NativeStackScreenProps<RootStackParamList, "HomeScreen">;
 
@@ -35,8 +39,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   }
 
   return (
-    <View style={tw`flex-1 py-6`}>
-      <View style={tw`gap-y-4`}>
+    <View style={tw`flex-1 pt-6`}>
+      <ScrollView style={tw`gap-y-4 mb-6`}>
         {categories?.allCategory?.map((category) => (
           <View style={tw`gap-y-1`} key={category._id}>
             <View style={tw`px-4`}>
@@ -46,7 +50,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
             <Courses courses={category.courses as Course[]} />
           </View>
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -61,7 +65,7 @@ const Courses: FC<CoursesProps> = ({ courses }) => {
   return (
     // Add gap
     <ScrollView
-      contentContainerStyle={tw`flex-row gap-x-4 py-5 mx-4`}
+      contentContainerStyle={tw`flex-row gap-x-4 py-5 px-4`}
       horizontal
       showsHorizontalScrollIndicator={false}
     >
@@ -77,12 +81,16 @@ interface CourseCardProps {
 }
 
 const CourseCard: FC<CourseCardProps> = ({ course }) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   return (
     // Add shadow
     <Pressable
-      style={tw.style("p-4 shadow rounded-3xl shadow-xl", {
+      style={tw.style("py-4 rounded-3xl", {
         width: width * 0.8,
       })}
+      onPress={() => navigation.navigate("CourseScreen", course)}
     >
       {course.thumbnail?.asset?.url && (
         <Image

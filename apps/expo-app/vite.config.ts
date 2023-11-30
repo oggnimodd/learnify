@@ -45,6 +45,7 @@ export default defineConfig({
         __dirname,
         "./src/hack/YouTubeIframe.tsx",
       ),
+      "@portabletext/react-native": "@portabletext/react",
     },
   },
   optimizeDeps: {

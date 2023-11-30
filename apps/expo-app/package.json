@@ -12,6 +12,8 @@
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@expo/webpack-config": "^19.0.0",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@portabletext/react": "^3.0.11",
+    "@portabletext/react-native": "^1.1.5",
     "@react-native-seoul/masonry-list": "^1.4.2",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",

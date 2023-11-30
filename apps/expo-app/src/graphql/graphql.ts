@@ -915,6 +915,20 @@ export type GetAllCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetAllCategoriesQuery = { __typename?: 'RootQuery', allCategory: Array<{ __typename?: 'Category', _id?: string | null, title?: string | null, description?: string | null, courses?: Array<{ __typename?: 'Course', _id?: string | null, title?: string | null, description?: string | null, thumbnail?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null } | null> | null }> };
 
+export type GetCourseChapterIdsQueryVariables = Exact<{
+  courseId: Scalars['ID']['input'];
+}>;
+
+
+export type GetCourseChapterIdsQuery = { __typename?: 'RootQuery', Course?: { __typename?: 'Course', chapters?: Array<{ __typename?: 'Chapter', _id?: string | null } | null> | null } | null };
+
+export type GetChapterDetailsQueryVariables = Exact<{
+  chapterId: Scalars['ID']['input'];
+}>;
+
+
+export type GetChapterDetailsQuery = { __typename?: 'RootQuery', Chapter?: { __typename?: 'Chapter', _id?: string | null, title?: string | null, contentRaw?: any | null, videoUrl?: string | null } | null };
+
 
 
 export const GetAllCategoriesDocument = `
@@ -949,6 +963,59 @@ export const useGetAllCategoriesQuery = <
       {
     queryKey: variables === undefined ? ['GetAllCategories'] : ['GetAllCategories', variables],
     queryFn: fetcher<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>(GetAllCategoriesDocument, variables),
+    ...options
+  }
+    )};
+
+export const GetCourseChapterIdsDocument = `
+    query GetCourseChapterIds($courseId: ID!) {
+  Course(id: $courseId) {
+    chapters {
+      _id
+    }
+  }
+}
+    `;
+
+export const useGetCourseChapterIdsQuery = <
+      TData = GetCourseChapterIdsQuery,
+      TError = unknown
+    >(
+      variables: GetCourseChapterIdsQueryVariables,
+      options?: Omit<UseQueryOptions<GetCourseChapterIdsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetCourseChapterIdsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetCourseChapterIdsQuery, TError, TData>(
+      {
+    queryKey: ['GetCourseChapterIds', variables],
+    queryFn: fetcher<GetCourseChapterIdsQuery, GetCourseChapterIdsQueryVariables>(GetCourseChapterIdsDocument, variables),
+    ...options
+  }
+    )};
+
+export const GetChapterDetailsDocument = `
+    query GetChapterDetails($chapterId: ID!) {
+  Chapter(id: $chapterId) {
+    _id
+    title
+    contentRaw
+    videoUrl
+  }
+}
+    `;
+
+export const useGetChapterDetailsQuery = <
+      TData = GetChapterDetailsQuery,
+      TError = unknown
+    >(
+      variables: GetChapterDetailsQueryVariables,
+      options?: Omit<UseQueryOptions<GetChapterDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetChapterDetailsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetChapterDetailsQuery, TError, TData>(
+      {
+    queryKey: ['GetChapterDetails', variables],
+    queryFn: fetcher<GetChapterDetailsQuery, GetChapterDetailsQueryVariables>(GetChapterDetailsDocument, variables),
     ...options
   }
     )};

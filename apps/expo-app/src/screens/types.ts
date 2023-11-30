@@ -1,8 +1,6 @@
-import { Cast, Movie } from "@/models";
+import { Course } from "@/graphql";
 
 export type RootStackParamList = {
   HomeScreen: undefined;
-  MovieDetailsScreen: Movie;
-  PersonDetailsScreen: Cast;
-  SearchScreen: undefined;
+  CourseScreen: Course;
 };
